@@ -33,11 +33,15 @@ Hot reload:
 3. Устанавливаем browser sync 'npm install -g browser-sync'
 4. Создаем файл в корне src с названием 'webpack.mix.js'
 5. Добавляем следующие строки:
+
 const mix = require('laravel-mix');
+
 require('laravel-mix-blade-reload');
+
 mix.js.bladeReload();
+
 mix.browserSync({
     host: "localhost",
-    proxy: 'localhost', //here
+    proxy: 'localhost',
     open: false,
 });
