@@ -2,7 +2,7 @@
 - https://www.youtube.com/watch?v=xpdPG9R2kGA - настраивал docker + php + composer
 - https://www.youtube.com/watch?v=5QrdFpxbkzA - настройка xDebug с докером
 
-Как настраивать PhpStorm:
+Как настраивать PhpStorm (в конце инструкция для hot-reload):
 
 Сначала устанавливаем laravel в папку src. 
 Перейти в докер docker exec -it [container-name] /bin/bash
@@ -25,3 +25,19 @@
 Тут проверять, есть ли ошибки
 
 ![image](https://user-images.githubusercontent.com/116734174/203304629-d846ad5a-ac3d-482d-b4f1-948a7ae31bf6.png)
+
+===========================
+Hot reload:
+1. Устанавливаем laravel mix 'npm install laravel-mix --save-dev'
+2. Устанавливаем blade reload extension 'npm i laravel-mix-blade-reload'
+3. Устанавливаем browser sync 'npm install -g browser-sync'
+4. Создаем файл в корне src с названием 'webpack.mix.js'
+5. Добавляем следующие строки:
+const mix = require('laravel-mix');
+require('laravel-mix-blade-reload');
+mix.js.bladeReload();
+mix.browserSync({
+    host: "localhost",
+    proxy: 'localhost', //here
+    open: false,
+});
