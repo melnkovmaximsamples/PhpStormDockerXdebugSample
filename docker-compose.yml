@@ -6,9 +6,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
-    container_name: webinar_php
+    container_name: webwise_php
     restart: unless-stopped
+    stdin_open: true
     tty: true
+    ports:
+      - "3000:3000"
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
@@ -19,44 +22,57 @@ services:
       - ./:/var/www
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./docker/php/zzz-xdebug.ini:/usr/local/etc/php/conf.d/zzz-xdebug.ini
+    networks:
+      - app-network
 
   #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: webinar_nginx
+    container_name: webwise_nginx
     restart: unless-stopped
     tty: true
     ports:
-      - "7777:80"
+      - "80:80"
+      - "443"
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
 
   #MySQL Service
   db:
     image: mysql:5.7.24
-    container_name: webinar_mysql
+    container_name: webwise_mysql
     command: "--default-authentication-plugin=mysql_native_password"
     restart: unless-stopped
     tty: true
     ports:
       - "7776:3306"
     environment:
-      MYSQL_DATABASE: webimar_laravel
-      MYSQL_USER: webimar_laravel
-      MYSQL_PASSWORD: webimar_laravel
-      MYSQL_ROOT_PASSWORD: webimar_laravel
+      MYSQL_DATABASE: webwise
+      MYSQL_USER: webwise
+      MYSQL_PASSWORD: webwise
+      MYSQL_ROOT_PASSWORD: webwise
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./docker/mysql/data:/var/lib/mysql/
       - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: webimar_phpmyadmin
+    container_name: webwise_phpmyadmin
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
     ports:
       - 7760:80
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
