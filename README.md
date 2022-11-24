@@ -45,3 +45,5 @@ mix.browserSync({
     proxy: 'localhost',
     open: false,
 });
+
+6. Команда для старта 'npx mix watch --hot -- --host 0.0.0.0 --port 3000 --watch-options-poll=1000'
