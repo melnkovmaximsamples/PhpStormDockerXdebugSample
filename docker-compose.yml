@@ -11,7 +11,11 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - "3000:3000"
+      - "3003:8000"
+    # For install project
+    # Move setup-composer.sh from src before creation
+    command: /bin/bash -c "export COMPOSER_HOME=/usr/local/bin && composer config --global github-oauth.github.com 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 && cd src && composer create-project laravel/laravel . && mv ../setup-composer.sh ./ && ./setup-composer.sh"
+    #command: /bin/bash -c "./src/setup-composer.sh"
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
@@ -19,9 +23,9 @@ services:
       PHP_IDE_CONFIG: 'serverName=host.docker.internal'
     working_dir: /var/www
     volumes:
-      - ./:/var/www
-      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
-      - ./docker/php/zzz-xdebug.ini:/usr/local/etc/php/conf.d/zzz-xdebug.ini
+       - ./:/var/www:rw
+       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+       - ./docker/php/zzz-xdebug.ini:/usr/local/etc/php/conf.d/zzz-xdebug.ini
     networks:
       - app-network
 
@@ -42,7 +46,8 @@ services:
 
   #MySQL Service
   db:
-    image: mysql:5.7.24
+    user: root
+    image: mysql:latest
     container_name: webwise_mysql
     command: "--default-authentication-plugin=mysql_native_password"
     restart: unless-stopped
@@ -57,7 +62,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql/
+      - ./docker/mysql/data:/var/lib/mysql:rw
       - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network

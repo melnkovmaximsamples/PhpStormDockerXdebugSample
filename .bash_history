@@ -27,3 +27,34 @@ php artisan vendor:publish --provider="Mcamara\LaravelLocalization\LaravelLocali
 composer require arrilot/laravel-widgets
 php artisan make:widget RecentNews
 exit
+cd /usr/local/bin
+ls
+echo > composer
+php composer config --global github-oauth.github.com 
+php composer config --global github-oauth.github.com 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 
+touch config.json
+composer config --global github-oauth.github.com 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 
+ls
+cd composer
+echo composer
+echo > composer
+php composer.phar config --global github-oauth.github.com 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 
+php composer config --global github-oauth.github.com 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 
+zxczx
+quit
+q
+cd /usr/local/bin
+ls
+php composer.phar config --global github-oauth.github.com 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 
+touch config.json
+touch config.json
+,,..
+cd /usr/local/bin
+ls
+php composer.phar config --global github-oauth.github.com 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 
+php composer.phar config github-oauth.github.com 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
+php composer.phar /usr/local/bin/config --global github-oauth.github.com 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 
+php composer.phar /usr/local/bin/config.json --global github-oauth.github.com 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 
+php composer.phar config github-oauth.github.com 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 
+php composer.phar config github-oauth.github.com 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
+ls

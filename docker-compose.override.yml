@@ -1,0 +1,17 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    platform: linux/amd64
+
+  #Nginx Service
+  webserver:
+    platform: linux/amd64
+
+  #MySQL Service
+  db:
+    platform: linux/amd64
+
+  phpmyadmin:
+    platform: linux/amd64

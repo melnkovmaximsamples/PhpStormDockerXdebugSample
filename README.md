@@ -2,6 +2,8 @@
 - https://www.youtube.com/watch?v=xpdPG9R2kGA - настраивал docker + php + composer
 - https://www.youtube.com/watch?v=5QrdFpxbkzA - настройка xDebug с докером
 
+sudo chown -R www-data:docker ./data - если ругается при старте докер композа
+
 Как настраивать PhpStorm (в конце инструкция для hot-reload):
 
 Сначала устанавливаем laravel в папку src. 
